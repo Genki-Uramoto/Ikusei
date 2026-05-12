@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>育成チーム 戦略ドキュメント 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+  :root {
+    --blue: #378ADD;
+    --blue-light: #EBF4FF;
+    --blue-mid: #BDD9F5;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --amber-mid: #FDE68A;
+    --gray: #6B7280;
+    --gray-light: #F3F4F6;
+    --gray-mid: #D1D5DB;
+    --text: #111827;
+    --text-sub: #6B7280;
+    --border: #E5E7EB;
+    --white: #FFFFFF;
+    --green: #10B981;
+    --red: #EF4444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    background: #FAFAFA;
+  }
+
+  /* ヘッダー */
+  .doc-header {
+    background: var(--text);
+    color: white;
+    padding: 48px 64px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 300px; height: 100%;
+    background: linear-gradient(135deg, transparent 50%, rgba(55,138,221,0.15) 50%);
+  }
+  .doc-header .badge {
+    display: inline-block;
+    background: var(--blue);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  .doc-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .doc-header .slogan {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--blue-mid);
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+  }
+  .doc-header .meta {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    color: #9CA3AF;
+    font-family: 'Inter', sans-serif;
+  }
+  .doc-header .meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* メインレイアウト */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* セクション */
+  .section {
+    margin-top: 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--text);
+  }
+  .section-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+    min-width: 80px;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .subsection {
+    margin-top: 32px;
+  }
+  .subsection-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-sub);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 3px solid var(--blue);
+  }
+
+  /* テーブル */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  th {
+    background: var(--text);
+    color: white;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #FAFAFA; }
+  tr:hover td { background: var(--blue-light); }
+
+  /* カラーバッジ */
+  .badge-blue {
+    display: inline-block;
+    background: var(--blue-light);
+    color: var(--blue);
+    border: 1px solid var(--blue-mid);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+  }
+  .badge-amber {
+    display: inline-block;
+    background: var(--amber-light);
+    color: #92400E;
+    border: 1px solid var(--amber-mid);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+  }
+  .badge-gray {
+    display: inline-block;
+    background: var(--gray-light);
+    color: var(--gray);
+    border: 1px solid var(--gray-mid);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+  }
+  .badge-green {
+    display: inline-block;
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .badge-purple {
+    display: inline-block;
+    background: #F5F3FF;
+    color: #5B21B6;
+    border: 1px solid #DDD6FE;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+  }
+  .badge-teal {
+    display: inline-block;
+    background: #F0FDFA;
+    color: #0F766E;
+    border: 1px solid #99F6E4;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+  }
+  .phase-row-purple td:first-child { border-left: 3px solid #7C3AED; }
+  .phase-row-teal td:first-child { border-left: 3px solid #0D9488; }
+  /* インフォボックス */
+  .info-box {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 16px;
+    color: #1E3A5F;
+  }
+  .note-box {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: #92400E;
+    margin-top: 12px;
+  }
+
+  /* KRカード */
+  .kr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .kr-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    border-top: 3px solid var(--blue);
+  }
+  .kr-card .kr-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+  .kr-card .kr-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kr-card .kr-value span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-sub);
+  }
+  .kr-card .kr-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.5;
+  }
+  .kr-card .kr-tag {
+    font-size: 10px;
+    color: var(--blue);
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* SVGコンテナ */
+  .svg-container {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 16px;
+    overflow-x: auto;
+  }
+
+  /* KaTeX */
+  .math-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 16px;
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  /* 施策リスト */
+  .measures-list {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .measures-list li {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .measures-list li:last-child { border-bottom: none; }
+  .measures-list li::before {
+    content: '→';
+    color: var(--blue);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .measure-name { font-weight: 700; }
+  .measure-desc { color: var(--text-sub); font-size: 12px; }
+  .measure-tag {
+    font-size: 10px;
+    color: var(--amber);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* フェーズ表 */
+  .phase-row-blue td:first-child { border-left: 3px solid var(--blue); }
+  .phase-row-gray td:first-child { border-left: 3px solid var(--gray-mid); }
+
+  /* コードブロック（ツリー） */
+  .tree-block {
+    background: #1E293B;
+    color: #94A3B8;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    padding: 20px 24px;
+    border-radius: 6px;
+    margin-top: 12px;
+  }
+  .tree-block .hl { color: #7DD3FC; }
+  .tree-block .hl2 { color: #86EFAC; }
+
+  /* セパレーター */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* TBDバッジ */
+  .tbd {
+    display: inline-block;
+    background: #FEF3C7;
+    color: #D97706;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* フッター */
+  .doc-footer {
+    background: var(--text);
+    color: #6B7280;
+    padding: 24px 64px;
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+  }
+
+  /* SVGスタイル（共通） */
+  svg .th { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 700; fill: #111827; }
+  svg .ts { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #6B7280; }
+  svg .arr { stroke: #9CA3AF; stroke-width: 1.5; fill: none; }
+  svg .c-blue rect { fill: #EBF4FF; stroke: #378ADD; }
+  svg .c-blue text { fill: #1E3A5F; }
+  svg .c-amber rect { fill: #FFFBEB; stroke: #F59E0B; }
+  svg .c-amber text { fill: #92400E; }
+  svg .c-gray rect { fill: #F3F4F6; stroke: #D1D5DB; }
+  svg .c-gray text { fill: #374151; }
+  svg .c-purple rect { fill: #F5F3FF; stroke: #7C3AED; }
+  svg .c-purple text { fill: #3B0764; }
+  svg .c-teal rect { fill: #F0FDFA; stroke: #0D9488; }
+  svg .c-teal text { fill: #042F2E; }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<div class="doc-header">
+  <div class="badge">NEW TEAM STRATEGY 2025</div>
+  <h1>育成チーム 戦略ドキュメント</h1>
+  <div class="slogan">Faster Start, Sharper Edge — 速い立ち上がりと、磨かれ続ける講師力を両立する</div>
+  <div class="meta">
+    <span>📅 2025年5月</span>
+    <span>👤 L: 木下勇太 / M: 浦本絃希</span>
+    <span>🏢 キカガク PMG Group</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 01 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 01</span>
+      <span class="section-title">背景と方針</span>
+    </div>
+
+    <div class="info-box">
+      FY2027 売上 100 億円に向けた講師供給基盤の確立に向け、PMG 組織再編の一環として育成チームを新設する。マネジ企画から育成機能を切り離し、全講師層の「質×スピード」に責任を持つ独立チームとして発足させる。
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">設立の意図</div>
+      <table>
+        <tr><th>観点</th><th>内容</th></tr>
+        <tr><td>専門性と意思決定スピード</td><td>育成領域に特化した意思決定を速める</td></tr>
+        <tr><td>責任の明確化</td><td>講師品質に対する責任の所在を明確化する</td></tr>
+        <tr><td>全講師層への継続的介入</td><td>「明瞭度」を軸に、新規・既存を問わず全講師層を継続的に磨き込む体制を構築する</td></tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">責任範囲</div>
+      <div class="info-box">
+        育成チームは全講師層（社内・パートナー × 新規・既存）を継続的に担う。新規育成完了後も既存層として育成対象に含まれる。
+      </div>
+      <table>
+        <tr><th>対象</th><th>区分</th><th>範囲</th></tr>
+        <tr class="phase-row-purple">
+          <td><span class="badge-purple">社内講師</span></td>
+          <td>新規</td>
+          <td>オンボ終了後 → 新規育成 → 登壇テスト → PMG配属（2〜3ヶ月）→ SDG配属まで</td>
+        </tr>
+        <tr class="phase-row-purple">
+          <td><span class="badge-purple">社内講師</span></td>
+          <td>既存</td>
+          <td>SDG配属以降。登壇品質（明瞭度）の継続的改善</td>
+        </tr>
+        <tr class="phase-row-teal">
+          <td><span class="badge-teal">P講師</span></td>
+          <td>新規</td>
+          <td>オンボ終了後 → 新規育成 → 登壇テスト → メイン登壇まで</td>
+        </tr>
+        <tr class="phase-row-teal">
+          <td><span class="badge-teal">P講師</span></td>
+          <td>既存</td>
+          <td>メイン登壇以降。担当コース拡張、登壇品質の継続的改善</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">責任範囲フロー図</div>
+      <div class="svg-container">
+        <svg width="100%" viewBox="0 0 680 640" role="img">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+
+          <text class="th" x="40" y="44">社内講師</text>
+          <g class="c-gray"><rect x="40" y="60" width="70" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="75" y="82" text-anchor="middle" dominant-baseline="central">オンボ</text>
+            <text class="ts" x="75" y="98" text-anchor="middle" dominant-baseline="central">SDG・人事</text></g>
+          <line x1="110" y1="84" x2="124" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="124" y="60" width="74" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="161" y="82" text-anchor="middle" dominant-baseline="central">新規育成</text>
+            <text class="ts" x="161" y="98" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <line x1="198" y1="84" x2="212" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="212" y="60" width="74" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="249" y="82" text-anchor="middle" dominant-baseline="central">登壇テスト</text>
+            <text class="ts" x="249" y="98" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <line x1="286" y1="84" x2="300" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="300" y="60" width="74" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="337" y="82" text-anchor="middle" dominant-baseline="central">PMG配属</text>
+            <text class="ts" x="337" y="98" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <text class="ts" x="400" y="78" text-anchor="middle">2〜3ヶ月</text>
+          <line x1="374" y1="84" x2="426" y2="84" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="426" y="60" width="74" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="463" y="82" text-anchor="middle" dominant-baseline="central">SDG配属</text>
+            <text class="ts" x="463" y="98" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <path d="M 500 84 L 520 84 L 520 140 L 540 140" stroke="#9CA3AF" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 500 84 L 520 84 L 520 190 L 540 190" stroke="#9CA3AF" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 500 84 L 520 84 L 520 240 L 540 240" stroke="#9CA3AF" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 500 84 L 520 84 L 520 290 L 540 290" stroke="#9CA3AF" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="540" y="120" width="120" height="40" rx="5" stroke-width="0.5"/>
+            <text class="th" x="600" y="134" text-anchor="middle" dominant-baseline="central">既存育成（明瞭度）</text>
+            <text class="ts" x="600" y="152" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <g class="c-amber"><rect x="540" y="170" width="120" height="40" rx="5" stroke-width="0.5"/>
+            <text class="th" x="600" y="184" text-anchor="middle" dominant-baseline="central">既存育成（満足度）</text>
+            <text class="ts" x="600" y="202" text-anchor="middle" dominant-baseline="central">マネジ企画</text></g>
+          <g class="c-gray"><rect x="540" y="220" width="120" height="40" rx="5" stroke-width="0.5"/>
+            <text class="th" x="600" y="234" text-anchor="middle" dominant-baseline="central">コース拡張</text>
+            <text class="ts" x="600" y="252" text-anchor="middle" dominant-baseline="central">SDG</text></g>
+          <g class="c-gray"><rect x="540" y="270" width="120" height="40" rx="5" stroke-width="0.5"/>
+            <text class="th" x="600" y="284" text-anchor="middle" dominant-baseline="central">案件推進</text>
+            <text class="ts" x="600" y="302" text-anchor="middle" dominant-baseline="central">SDG</text></g>
+
+          <line x1="40" y1="360" x2="660" y2="360" stroke="#E5E7EB" stroke-width="0.5" stroke-dasharray="4 4"/>
+
+          <text class="th" x="40" y="400">パートナー講師</text>
+          <g class="c-amber"><rect x="40" y="415" width="80" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="80" y="437" text-anchor="middle" dominant-baseline="central">オンボ</text>
+            <text class="ts" x="80" y="453" text-anchor="middle" dominant-baseline="central">マネジ企画</text></g>
+          <line x1="120" y1="439" x2="138" y2="439" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="138" y="415" width="74" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="175" y="437" text-anchor="middle" dominant-baseline="central">新規育成</text>
+            <text class="ts" x="175" y="453" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <line x1="212" y1="439" x2="226" y2="439" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="226" y="415" width="74" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="263" y="437" text-anchor="middle" dominant-baseline="central">登壇テスト</text>
+            <text class="ts" x="263" y="453" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <line x1="300" y1="439" x2="314" y2="439" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="314" y="415" width="74" height="48" rx="6" stroke-width="0.5"/>
+            <text class="th" x="351" y="437" text-anchor="middle" dominant-baseline="central">メイン登壇</text>
+            <text class="ts" x="351" y="453" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <path d="M 388 439 L 460 439 L 460 490 L 490 490" stroke="#9CA3AF" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 388 439 L 460 439 L 460 535 L 490 535" stroke="#9CA3AF" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <path d="M 388 439 L 460 439 L 460 580 L 490 580" stroke="#9CA3AF" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+          <g class="c-blue"><rect x="490" y="470" width="120" height="40" rx="5" stroke-width="0.5"/>
+            <text class="th" x="550" y="484" text-anchor="middle" dominant-baseline="central">既存育成（明瞭度）</text>
+            <text class="ts" x="550" y="502" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+          <g class="c-amber"><rect x="490" y="515" width="120" height="40" rx="5" stroke-width="0.5"/>
+            <text class="th" x="550" y="529" text-anchor="middle" dominant-baseline="central">既存育成（満足度）</text>
+            <text class="ts" x="550" y="547" text-anchor="middle" dominant-baseline="central">マネジ企画</text></g>
+          <g class="c-blue"><rect x="490" y="560" width="120" height="40" rx="5" stroke-width="0.5"/>
+            <text class="th" x="550" y="574" text-anchor="middle" dominant-baseline="central">コース拡張</text>
+            <text class="ts" x="550" y="592" text-anchor="middle" dominant-baseline="central">育成T</text></g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">品質指標</div>
+      <table>
+        <tr><th>指標</th><th>担当</th><th>内容</th></tr>
+        <tr>
+          <td><span class="badge-purple">明瞭度</span></td>
+          <td>育成T</td>
+          <td>講師が直接コントロール可能な品質指標。育成施策の有効性を直接評価</td>
+        </tr>
+        <tr>
+          <td><span class="badge-teal">担当コース拡張</span></td>
+          <td>育成T（P講師のみ）</td>
+          <td>既存P講師が登壇可能なコース範囲の継続的拡大</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 02 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 02</span>
+      <span class="section-title">チーム体制</span>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">育成チーム（復活）</div>
+      <table>
+        <tr><th>役割</th><th>氏名</th><th>備考</th></tr>
+        <tr>
+          <td><span class="badge-blue">L</span> リーダー</td>
+          <td>木下勇太</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="badge-blue">M</span> メンバー</td>
+          <td>浦本絃希</td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="note-box">⚠️ 育休中の重要な戦略判断における相談先は未定（要確定）</div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">PMG Group 内での位置づけ</div>
+      <div class="svg-container">
+        <svg width="100%" viewBox="0 0 680 320" role="img">
+          <g class="c-gray"><rect x="240" y="20" width="200" height="56" rx="8" stroke-width="0.5"/>
+            <text class="th" x="340" y="42" text-anchor="middle" dominant-baseline="central">PMG Group</text>
+            <text class="ts" x="340" y="62" text-anchor="middle" dominant-baseline="central">Group Manager: 木下勇太</text></g>
+          <line x1="340" y1="76" x2="340" y2="110" stroke="#D1D5DB" stroke-width="0.5"/>
+          <line x1="100" y1="110" x2="580" y2="110" stroke="#D1D5DB" stroke-width="0.5"/>
+          <line x1="100" y1="110" x2="100" y2="140" stroke="#D1D5DB" stroke-width="0.5"/>
+          <line x1="340" y1="110" x2="340" y2="140" stroke="#D1D5DB" stroke-width="0.5"/>
+          <line x1="580" y1="110" x2="580" y2="140" stroke="#D1D5DB" stroke-width="0.5"/>
+          <g class="c-blue"><rect x="20" y="140" width="160" height="80" rx="8" stroke-width="1.5"/>
+            <text class="ts" x="100" y="160" text-anchor="middle" dominant-baseline="central">NEW TEAM</text>
+            <text class="th" x="100" y="180" text-anchor="middle" dominant-baseline="central">育成T（仮）</text>
+            <text class="ts" x="100" y="198" text-anchor="middle" dominant-baseline="central">L: 木下勇太 / M: 浦本絃希</text>
+</g>
+          <g class="c-gray"><rect x="260" y="140" width="160" height="80" rx="8" stroke-width="0.5"/>
+            <text class="ts" x="340" y="160" text-anchor="middle" dominant-baseline="central">MANAGEMENT PLANNING</text>
+            <text class="th" x="340" y="180" text-anchor="middle" dominant-baseline="central">マネジ企画</text>
+            <text class="ts" x="340" y="200" text-anchor="middle" dominant-baseline="central">L: 岡野美月 / M: 歳森崇弘</text></g>
+          <g class="c-gray"><rect x="500" y="140" width="160" height="80" rx="8" stroke-width="0.5"/>
+            <text class="ts" x="580" y="160" text-anchor="middle" dominant-baseline="central">ASSIGN TEAM</text>
+            <text class="th" x="580" y="180" text-anchor="middle" dominant-baseline="central">アサインT</text>
+            <text class="ts" x="580" y="200" text-anchor="middle" dominant-baseline="central">濵田 / 露木 / 堀江 / 北原</text></g>
+          <g class="c-gray" opacity="0.7"><rect x="200" y="260" width="280" height="50" rx="8" stroke-width="0.5" stroke-dasharray="4 4"/>
+            <text class="th" x="340" y="278" text-anchor="middle" dominant-baseline="central">PMG 全体：講師マッチング事業</text>
+            <text class="ts" x="340" y="296" text-anchor="middle" dominant-baseline="central">チームに落とさず PMG 全体で保持</text></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 03 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 03</span>
+      <span class="section-title">育成T OKR</span>
+    </div>
+
+    <div class="info-box">
+      <strong>Objective: Faster Start, Sharper Edge</strong><br>
+      速い立ち上がりと、磨かれ続ける講師力を両立する。新規講師は最短で現場戦力に、既存講師は継続的に磨き込み、全講師層の「質×スピード」に責任を持つ。
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">KR（コア指標）</div>
+      <div class="kr-grid">
+        <div class="kr-card">
+          <div class="kr-label">KR 1</div>
+          <div class="kr-value">80<span>%</span></div>
+          <div class="kr-desc">全講師の明瞭度 4.4+率</div>
+          <div class="kr-tag">ROI: リピート率 ↑ → 利益 ↑</div>
+        </div>
+        <div class="kr-card">
+          <div class="kr-label">KR 2</div>
+          <div class="kr-value">45<span> 日以内</span></div>
+          <div class="kr-desc">社内講師：登壇テスト合格まで（仮）</div>
+          <div class="kr-tag">ROI: リードタイム ↓ → コスト ↓</div>
+        </div>
+        <div class="kr-card">
+          <div class="kr-label">KR 3</div>
+          <div class="kr-value">2.2<span> 回以内</span></div>
+          <div class="kr-desc">P講師：対面模擬講義平均回数（登壇テスト含む）</div>
+          <div class="kr-tag">ROI: 質×スピード → コスト ↓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">KPI（ウォッチ指標）</div>
+      <table>
+        <tr><th>指標</th><th>内容</th><th>位置づけ</th></tr>
+        <tr>
+          <td>登壇可能コース純増</td>
+          <td>P講師の対応幅拡大</td>
+          <td>P講師の活躍幅の広がりを追う</td>
+        </tr>
+        <tr>
+          <td>TTT 受講完了率</td>
+          <td>既存P講師の TTT 受講ルート活用状況</td>
+          <td>既存層への育成施策の浸透度</td>
+        </tr>
+        <tr>
+          <td>P 講師育成リードタイム</td>
+          <td>契約日 → 登壇テスト合格日</td>
+          <td>KR3（模擬回数）の結果指標として参考に追う</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">ROI への影響</div>
+      <div class="math-box">
+        $$\text{ROI}_{\text{育成T}} = \frac{\text{講師数} \times \overbrace{\textcolor{#378ADD}{\text{稼働率}}}^{\small\text{P講師コース拡張}} \times \text{単価} \times \overbrace{\textcolor{#378ADD}{\text{リピート率}}}^{\small\text{全体明瞭度}}}{\text{採用コスト} + \underbrace{\textcolor{#378ADD}{\text{育成人数} \times \text{リードタイム}}}_{\small\text{社内・P講師リードタイム}} + \text{運営コスト}}$$
+      </div>
+      <table style="margin-top:12px;">
+        <tr><th>分子（利益 ↑）</th><th>分母（コスト ↓）</th></tr>
+        <tr>
+          <td>
+            <strong>明瞭度 4.4+率:</strong> 高品質講師 → リピート率 ↑ → 売上<br>
+            <strong>コース拡張:</strong> P講師の対応幅拡大 → 稼働率 ↑ → 1人あたり売上増
+          </td>
+          <td>
+            <strong>社内講師L/T:</strong> 短縮 → 非稼働コスト削減、改善サイクル早期化<br>
+            <strong>P講師模擬回数:</strong> 削減 → 早期戦力化 → 育成コスト圧縮
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 04 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 04</span>
+      <span class="section-title">KR1: 明瞭度 4セグメント分析</span>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">品質指標の責任分担</div>
+      <table>
+        <tr><th>指標</th><th>担当</th><th>見る範囲</th><th>意味</th></tr>
+        <tr>
+          <td><span class="badge-purple">明瞭度</span></td>
+          <td>育成T</td>
+          <td>講師品質</td>
+          <td>講師が直接コントロール可能な指標。育成施策の有効性を直接評価</td>
+        </tr>
+        <tr>
+          <td><span class="badge-teal">満足度</span></td>
+          <td>マネジ企画</td>
+          <td>講師品質以外（案件 / 商材 / 運営など）</td>
+          <td>SDG・商材Gなどと連携し、講師起因以外の品質要因を改善</td>
+        </tr>
+      </table>
+      <div class="info-box">
+        満足度は全要因の総合指標。講師品質起因の改善は育成Tが明瞭度を通じて担い、マネジ企画はそれ以外の起因（案件・商材・運営）を横グループ連携で改善する責任分担とする。
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">KR1 の 4セグメント分解</div>
+      <div class="tree-block">
+        全講師の明瞭度 4.4+率（KR） ── 目標: <span class="hl">80%</span><br>
+        ├─ 社内講師<br>
+        │   ├─ 新規: <span class="hl2">PMG配属後 3ヶ月</span>の 4.4+維持率<br>
+        │   └─ 既存: 介入後 3ヶ月の明瞭度変化<br>
+        └─ P 講師<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├─ 新規: <span class="hl2">メイン登壇後 3ヶ月</span>の 4.4+維持率<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;└─ 既存: 介入後 3ヶ月の明瞭度変化
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">セグメント別 詳細</div>
+      <table>
+        <tr><th>セグメント</th><th>対象</th><th>介入内容</th><th>計測起点</th><th>閾値</th></tr>
+        <tr>
+          <td><span class="badge-purple">社内・新規</span></td>
+          <td>新規育成 → 登壇テスト → PMG配属した講師</td>
+          <td>育成パイプライン全体</td>
+          <td>PMG配属日</td>
+          <td>4.4 以上を維持</td>
+        </tr>
+        <tr>
+          <td><span class="badge-purple">社内・既存</span></td>
+          <td>既存社内講師</td>
+          <td>TTT 受講・動画アラートによる介入・登壇の巡回チェック</td>
+          <td>介入開始日</td>
+          <td>4.4 以上を維持</td>
+        </tr>
+        <tr>
+          <td><span class="badge-teal">P講師・新規</span></td>
+          <td>登壇テスト合格 → メイン登壇した新規P講師</td>
+          <td>新規育成 → 模擬 → 登壇テスト</td>
+          <td>メイン登壇日</td>
+          <td>4.4 以上を維持</td>
+        </tr>
+        <tr>
+          <td><span class="badge-teal">P講師・既存</span></td>
+          <td>既存P講師</td>
+          <td>TTT 受講ルート・コース拡張研修</td>
+          <td>介入開始日</td>
+          <td>4.4 以上を維持</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">分析の読み方</div>
+      <table>
+        <tr><th>パターン</th><th>意味</th></tr>
+        <tr><td>新規セグメントが高く、既存が低い</td><td>育成パイプラインは機能、既存層への展開が課題</td></tr>
+        <tr><td>全セグメントが高い</td><td>育成の仕組みが組織全体で機能している（目指す姿）</td></tr>
+        <tr><td>新規セグメントが低い</td><td>育成の内在化そのものに問題がある</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 05 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 05</span>
+      <span class="section-title">KR2: 社内講師リードタイム</span>
+    </div>
+
+    <div class="info-box">
+      <strong>KR2: 社内講師：登壇テスト合格まで 45 日以内（仮）</strong><br>
+      計測方法: 入社日 → 登壇テスト合格日
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">フェーズ別内訳</div>
+      <table>
+        <tr><th>フェーズ</th><th>担当</th><th>現状（感覚値）</th><th>目標</th><th>短縮幅</th></tr>
+        <tr class="phase-row-gray">
+          <td>全社オンボ</td>
+          <td><span class="badge-gray">人事</span></td>
+          <td>3 日</td>
+          <td>3 日</td>
+          <td>0</td>
+        </tr>
+        <tr class="phase-row-gray">
+          <td>部門オンボ</td>
+          <td><span class="badge-gray">SDG</span></td>
+          <td>10 日</td>
+          <td>10 日</td>
+          <td>0</td>
+        </tr>
+        <tr class="phase-row-blue">
+          <td>TTT 受講・模擬講義・登壇テスト</td>
+          <td><span class="badge-blue">育成T</span></td>
+          <td>47 日</td>
+          <td>32 日</td>
+          <td>▲ 15 日</td>
+        </tr>
+        <tr style="font-weight:700;">
+          <td>合計</td>
+          <td></td>
+          <td>60 日</td>
+          <td>45 日</td>
+          <td>▲ 15 日（25% 短縮）</td>
+        </tr>
+      </table>
+      <div class="note-box">短縮対象は育成T管轄の「TTT以降」のみ。オンボ部分（人事・SDG）は対象外。各フェーズの日数はQ2でベースライン正確計測後に確定。</div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">主な短縮施策</div>
+      <ul class="measures-list">
+        <li><span><span class="measure-name">TTT カリキュラムのブラッシュアップ</span> — <span class="measure-desc">既存カリキュラムを見直し、47日→32日の短縮を実現</span></span></li>
+        <li><span><span class="measure-name">動画AIレビューによるFB</span> <span class="measure-tag">※KR1共通・既存継続</span> — <span class="measure-desc">FBサイクルの高速化でリードタイム短縮に貢献</span></span></li>
+        <li><span><span class="measure-name">模擬講義実施フローの更新</span> — <span class="measure-desc">スケジュール調整の効率化、模擬の集中化</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 06 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 06</span>
+      <span class="section-title">KR3: P講師 模擬回数</span>
+    </div>
+
+    <div class="info-box">
+      <strong>KR3: P講師：対面模擬講義平均回数（登壇テスト含む）2.2 回以内</strong><br>
+      計測方法: 契約日から登壇テスト合格までの模擬講義実施回数（登壇テスト含む）の平均
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">ベースライン → 目標</div>
+      <table>
+        <tr><th></th><th>現状</th><th>目標</th><th>改善幅</th></tr>
+        <tr>
+          <td>平均模擬回数（登壇テスト含む）</td>
+          <td><strong>4.5 回</strong></td>
+          <td><strong style="color:var(--blue);">2.2 回</strong></td>
+          <td>▲ 2.3 回（51% 削減）</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">目標値の根拠</div>
+      <div class="info-box">
+        模擬講義（1回）+ 登壇テスト（1回）を基本とし、過去実績から5人に1人（20%）が登壇テストを再受験することを考慮した期待値として <strong>2.2回を目標</strong>とする。現状4.5回との差分2.3回が、模擬の重複・FBサイクルの非効率によるロスと想定。
+        $$\text{目標} = \underbrace{1}_{\text{模擬}} + \underbrace{1}_{\text{テスト}} + \underbrace{0.2}_{\text{再受験率 20\%}} = 2.2 \text{ 回}$$
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">フェーズ別内訳</div>
+      <table>
+        <tr><th>フェーズ</th><th>担当</th><th>現状</th><th>目標</th></tr>
+        <tr class="phase-row-amber">
+          <td>オンボ</td>
+          <td><span class="badge-amber">マネジ企画</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr class="phase-row-blue">
+          <td>模擬講義</td>
+          <td><span class="badge-blue">育成T</span></td>
+          <td>3.5 回（仮）</td>
+          <td>1.0 回</td>
+        </tr>
+        <tr class="phase-row-blue">
+          <td>登壇テスト（再受験含む）</td>
+          <td><span class="badge-blue">育成T</span></td>
+          <td>1.0 回（仮）</td>
+          <td>1.2 回</td>
+        </tr>
+        <tr style="font-weight:700;">
+          <td>合計</td>
+          <td></td>
+          <td>4.5 回</td>
+          <td>2.2 回</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">主な改善施策</div>
+      <ul class="measures-list">
+        <li><span><span class="measure-name">マスター動画の更新・新規作成</span> — <span class="measure-desc">事前学習の質を高め、模擬前の理解度を底上げ</span></span></li>
+        <li><span><span class="measure-name">AI 採点システムの導入</span> <span class="measure-tag">※新規構築</span> — <span class="measure-desc">模擬・登壇テストの採点を自動化し、FBの速度と精度を向上</span></span></li>
+        <li><span><span class="measure-name">チェックリストの策定と運用フローの構築</span> <span class="measure-tag">※KR1共通</span> — <span class="measure-desc">模擬前の準備基準を標準化し、模擬重複・再受験を削減</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 07 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 07</span>
+      <span class="section-title">主要施策</span>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">KR1（明瞭度）関連施策</div>
+      <ul class="measures-list">
+        <li><span><span class="measure-name">TTT 設計・運営（L1〜L3 全コース）</span> — <span class="measure-desc">全講師層を対象とした体系的な育成プログラムの設計・運営</span></span></li>
+        <li><span><span class="measure-name">OJT・メンタリング</span> — <span class="measure-desc">登壇後の現場フォローと個別育成</span></span></li>
+        <li><span><span class="measure-name">動画AIレビューによるFB</span> <span class="measure-tag">※既存・継続 ※KR2共通</span> — <span class="measure-desc">動画AI解析によるFBを引き続き活用</span></span></li>
+        <li><span><span class="measure-name">アンケート連動Slackアラート</span> <span class="measure-tag">※新規構築</span> — <span class="measure-desc">明瞭度 4.4 未満でSlack専用チャネルに自動通知、育成Tが即時フォロー</span></span></li>
+        <li><span><span class="measure-name">動画AI明瞭度行動チェック</span> <span class="measure-tag">※新規構築</span> — <span class="measure-desc">明瞭度を下げる具体的行動をAIで特定しFBに組み込む</span></span></li>
+        <li><span><span class="measure-name">チェックリストの策定と運用フローの構築</span> <span class="measure-tag">※KR3共通</span> — <span class="measure-desc">登壇前・模擬前の準備基準を標準化</span></span></li>
+        <li><span><span class="measure-name">実際の登壇の巡回チェックフロー構築と運用</span> — <span class="measure-desc">現場での登壇品質を直接確認する巡回体制を整備</span></span></li>
+      </ul>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">KR2（社内講師リードタイム）関連施策</div>
+      <ul class="measures-list">
+        <li><span><span class="measure-name">TTT カリキュラムのブラッシュアップ</span> — <span class="measure-desc">既存カリキュラムを見直し、47日→32日の短縮を実現</span></span></li>
+        <li><span><span class="measure-name">動画AIレビューによるFB</span> <span class="measure-tag">※既存・継続 ※KR1共通</span> — <span class="measure-desc">FBサイクルの高速化でリードタイム短縮に貢献</span></span></li>
+        <li><span><span class="measure-name">模擬講義実施フローの更新</span> — <span class="measure-desc">スケジュール調整の効率化、模擬の集中化</span></span></li>
+      </ul>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">KR3（P講師 模擬回数）関連施策</div>
+      <ul class="measures-list">
+        <li><span><span class="measure-name">マスター動画の更新・新規作成</span> — <span class="measure-desc">事前学習の質を高め、模擬前の理解度を底上げ</span></span></li>
+        <li><span><span class="measure-name">AI 採点システムの導入</span> <span class="measure-tag">※新規構築</span> — <span class="measure-desc">模擬・登壇テストの採点を自動化し、FBの速度と精度を向上</span></span></li>
+        <li><span><span class="measure-name">チェックリストの策定と運用フローの構築</span> <span class="measure-tag">※KR1共通</span> — <span class="measure-desc">模擬前の準備基準を標準化し、模擬重複・再受験を削減</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 08 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 08</span>
+      <span class="section-title">運営設計</span>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">定例会議</div>
+      <table>
+        <tr><th>会議体</th><th>頻度</th><th>参加者</th><th>目的</th></tr>
+        <tr>
+          <td>育成T 定例</td>
+          <td>週1回</td>
+          <td>木下・浦本</td>
+          <td>KR進捗確認・施策の優先度調整</td>
+        </tr>
+        <tr>
+          <td>PMG配属後 朝会</td>
+          <td>週2回</td>
+          <td>育成T・PMG配属後メンバー</td>
+          <td>進捗確認・課題共有</td>
+        </tr>
+        <tr>
+          <td>PMG配属後 1on1</td>
+          <td>週1回</td>
+          <td>浦本・PMG配属後メンバー（個別）</td>
+          <td>メンタリング</td>
+        </tr>
+        <tr>
+          <td>PMG Group 定例</td>
+          <td><span class="tbd">TBD</span>（復活）</td>
+          <td>育成T・マネジ企画</td>
+          <td>全体方針すり合わせ</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">意思決定フロー</div>
+      <table>
+        <tr><th>判断の種類</th><th>意思決定者</th><th>備考</th></tr>
+        <tr>
+          <td>日常的な施策推進・優先度判断</td>
+          <td>木下・浦本</td>
+          <td>育成T内で完結</td>
+        </tr>
+        <tr>
+          <td>重要な戦略判断</td>
+          <td>木下・浦本</td>
+          <td>育休中の相談フローは未定（要確定）<span class="tbd" style="margin-left:6px;">TBD</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">他チームとの連携</div>
+      <table>
+        <tr><th>連携先</th><th>内容</th></tr>
+        <tr>
+          <td><span class="badge-amber">マネジ企画</span></td>
+          <td>P講師オンボ後の引き継ぎ、P講師登壇テスト合格後の引き渡し、満足度指標の共有</td>
+        </tr>
+        <tr>
+          <td><span class="badge-gray">SDG</span></td>
+          <td>社内講師の部門オンボ・配属連携、コース拡張の情報共有</td>
+        </tr>
+        <tr>
+          <td><span class="badge-gray">人事</span></td>
+          <td>社内講師の全社オンボ連携</td>
+        </tr>
+        <tr>
+          <td><span class="badge-gray">Ops企画</span></td>
+          <td>AIアラート仕組み構築の相談・連携</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">相談窓口</div>
+      <div class="info-box">
+        育成T への相談: Slack 専用チャネル（設置予定）
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 09 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">SECTION 09</span>
+      <span class="section-title">未決事項・継続検討</span>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">要確定（早期に決める必要あり）</div>
+      <table>
+        <tr><th>未決事項</th><th>状況</th><th>期限目安</th></tr>
+        <tr>
+          <td>育休中の重要判断の相談先</td>
+          <td><span class="tbd">未定</span></td>
+          <td>チーム発足前まで</td>
+        </tr>
+        <tr>
+          <td>育休中のリーダー体制</td>
+          <td><span class="tbd">検討中</span></td>
+          <td>浦本が臨時リーダーとなるかを含め、育休前までに確定</td>
+        </tr>
+        <tr>
+          <td>PMG Group 定例の頻度・設計</td>
+          <td>復活予定、頻度・設計は未定</td>
+          <td>チーム発足時</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">数値目標の確定（Q2 ベースライン計測後）</div>
+      <table>
+        <tr><th>未決事項</th><th>状況</th><th>期限目安</th></tr>
+        <tr>
+          <td>KR2: 社内講師リードタイム 45日の根拠確定</td>
+          <td>フェーズ別日数は感覚値。Q2で正確計測予定</td>
+          <td>Q2 正確計測後</td>
+        </tr>
+        <tr>
+          <td>KR3: P講師 模擬回数の現状内訳確定</td>
+          <td>模擬 / 登壇テストの内訳は実測値（4.5回計測済み）</td>
+          <td>Q2 正確計測後</td>
+        </tr>
+        <tr>
+          <td>KPI ウォッチ指標の計測基盤整備</td>
+          <td>TTT受講完了率・コース純増の計測方法未確定</td>
+          <td>Q2</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">中長期検討</div>
+      <table>
+        <tr><th>未決事項</th><th>状況</th></tr>
+        <tr>
+          <td>定性的な講師スキルの評価指標化</td>
+          <td>受講者アンケート・企業担当者FBなど、数値化が難しいスキルの評価方法を中長期で検討</td>
+        </tr>
+        <tr>
+          <td>木下復帰後の体制</td>
+          <td>育休復帰後のリーダー体制・役割分担は復帰時に再検討</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="doc-footer">
+  <span>育成チーム 戦略ドキュメント 2025 — キカガク PMG Group</span>
+  <span>L: 木下勇太 / M: 浦本絃希</span>
+</div>
+
+</body>
+</html>
